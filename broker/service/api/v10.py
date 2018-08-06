@@ -27,16 +27,18 @@ submissions = {}
 
 
 def run_submission(data):
-    if ('username' not in data or 'password' not in data or
-        'plugin' not in data or 'plugin_info' not in data):
-        API_LOG.log("Missing parameters in request")
-        raise ex.BadRequestException()
-    
-    username = data['username']
-    password = data['password']
-
-    authorization = authorizer.get_authorization(api.authorization_url,
-                                                 username, password)
+#   if ('username' not in data or 'password' not in data or
+#       'plugin' not in data or 'plugin_info' not in data):
+#       API_LOG.log("Missing parameters in request")
+#       raise ex.BadRequestException()
+#   
+#   username = data['username']
+#   password = data['password']
+#
+#   authorization = authorizer.get_authorization(api.authorization_url,
+#                                                username, password)
+    authorization = {}
+    authorization['success'] = True
 
     if not authorization['success']:
         API_LOG.log("Unauthorized request")
@@ -53,15 +55,18 @@ def run_submission(data):
 
 
 def stop_submission(submission_id, data):
-    if 'username' not in data or 'password' not in data:
-        API_LOG.log("Missing parameters in request")
-        raise ex.BadRequestException()
-    
-    username = data['username']
-    password = data['password']
+#   if 'username' not in data or 'password' not in data:
+#       API_LOG.log("Missing parameters in request")
+#       raise ex.BadRequestException()
+#   
+#   username = data['username']
+#   password = data['password']
+#
+#   authorization = authorizer.get_authorization(api.authorization_url,
+#                                                username, password)
 
-    authorization = authorizer.get_authorization(api.authorization_url,
-                                                 username, password)
+    authorization = {}
+    authorization['success'] = True
 
     if not authorization['success']:
         API_LOG.log("Unauthorized request")

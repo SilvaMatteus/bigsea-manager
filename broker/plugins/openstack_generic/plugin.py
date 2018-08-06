@@ -141,13 +141,6 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
                                 attempts -= 1
                                 time.sleep(30)
 
-            LOG.log("Setting up environment")
-            print "Setting up environment"
-
-            # Set CPU cap in all instances
-            controller.setup_environment(api.controller_url, instances,
-                                         starting_cap, data)
-
             # Execute application and start monitor and controller service.
             applications = []
             for ip in instances_ips:
@@ -235,7 +228,6 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
             self.application_time = application_time
             self.start_time = app_start_time
             self.update_application_state("OK")
-
             return str(application_time)
 
         except Exception as e:
