@@ -148,6 +148,8 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
                 print "Executing commands into the instance"
 
                 # TODO Check if exec_command will work without blocking exec
+                resp = request.get('http://localhost:5005/set-ip/' + ip)
+                print 'response from load balancer: %d' % resp.status_code
 
                 conn = self._get_ssh_connection(ip, api.key_path)
 
@@ -156,6 +158,7 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
 
                 app_id = "app-os-generic"+str(uuid.uuid4())[:8]
                 applications.append(app_id)
+
 
                 monitor_plugin = monitor_plugin
                 info_plugin = {
@@ -183,6 +186,7 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
                     LOG.log(e.message)
                     print e.message
 
+            subprocess.Popen("python /home/ubuntu/genetic-image-generator/builder.py")
             # Stop monitor and controller when each application stops
             application_running = True
             while application_running:
