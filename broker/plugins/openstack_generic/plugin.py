@@ -18,6 +18,7 @@ import paramiko
 import time
 import threading
 import requests
+import subprocess
 
 from broker.utils.openstack import connector as os_connector
 from broker.plugins import base
@@ -186,8 +187,8 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
                 except Exception as e:
                     LOG.log(e.message)
                     print e.message
-
-            subprocess.Popen("python /home/ubuntu/genetic-image-generator/builder.py")
+            time.sleep(10)
+            subprocess.Popen(["python", '/home/ubuntu/genetic-image-generator/builder.py'])
             # Stop monitor and controller when each application stops
             application_running = True
             while application_running:
