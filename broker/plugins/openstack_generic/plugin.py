@@ -17,6 +17,7 @@ import uuid
 import paramiko
 import time
 import threading
+import requests
 
 from broker.utils.openstack import connector as os_connector
 from broker.plugins import base
@@ -148,7 +149,7 @@ class OpenStackApplicationExecutor(GenericApplicationExecutor):
                 print "Executing commands into the instance"
 
                 # TODO Check if exec_command will work without blocking exec
-                resp = request.get('http://localhost:5005/set-ip/' + ip)
+                resp = requests.get('http://localhost:5005/set-ip/' + ip)
                 print 'response from load balancer: %d' % resp.status_code
 
                 conn = self._get_ssh_connection(ip, api.key_path)
